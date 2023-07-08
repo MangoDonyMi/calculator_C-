@@ -1,0 +1,79 @@
+using System;
+
+class Calculator
+{
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("Выберите операцию:");
+            Console.WriteLine("1 - Вычислить число Фибоначчи");
+            Console.WriteLine("2 - Вычислить натуральный логарифм");
+            Console.WriteLine("0 - Выйти из программы");
+
+            int choice = int.Parse(Console.ReadLine());
+
+            if (choice == 0)
+            {
+                break;
+            }
+
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Введите номер числа Фибоначчи: ");
+                    int fibNumber = int.Parse(Console.ReadLine());
+                    long fibResult = CalculateFibonacci(fibNumber);
+                    Console.WriteLine($"Число Фибоначчи под номером {fibNumber} равно: {fibResult}");
+                    break;
+                case 2:
+                    Console.Write("Введите число для вычисления натурального логарифма: ");
+                    double logNumber = double.Parse(Console.ReadLine());
+                    double logResult = CalculateNaturalLogarithm(logNumber);
+                    Console.WriteLine($"Натуральный логарифм числа {logNumber} равен: {logResult}");
+                    break;
+                default:
+                    Console.WriteLine("Некорректный выбор операции. Попробуйте снова.");
+                    break;
+            }
+
+            Console.WriteLine();
+        }
+    }
+
+    static long CalculateFibonacci(int n)
+    {
+        if (n <= 0)
+        {
+            throw new ArgumentException("Номер числа Фибоначчи должен быть положительным.");
+        }
+
+        if (n == 1 || n == 2)
+        {
+            return 1;
+        }
+
+        long a = 1;
+        long b = 1;
+        long result = 0;
+
+        for (int i = 3; i <= n; i++)
+        {
+            result = a + b;
+            a = b;
+            b = result;
+        }
+
+        return result;
+    }
+
+    static double CalculateNaturalLogarithm(double x)
+    {
+        if (x <= 0)
+        {
+            throw new ArgumentException("Аргумент натурального логарифма должен быть положительным.");
+        }
+
+        return Math.Log(x);
+    }
+}
